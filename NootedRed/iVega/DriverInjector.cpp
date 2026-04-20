@@ -6,6 +6,7 @@
 #include <Headers/kern_api.hpp>
 #include <iVega/DriverInjector.hpp>
 #include <libkern/c++/OSString.h>
+#include "../NRed.hpp"
 
 static iVega::DriverInjector instance {};
 
@@ -40,6 +41,11 @@ void iVega::DriverInjector::processPatcher(KernelPatcher &patcher) {
 }
 
 bool iVega::DriverInjector::wrapAddDrivers(void *const self, OSArray *const array, const bool doNubMatching) {
+    if (NRed::singleton().getAttributes().isMendocino()) {
+        DBGLOG("DriverInjector", "Skipping personality injection for Mendocino bring-up build");
+        return FunctionCast(wrapAddDrivers, singleton().orgAddDrivers)(self, array, doNubMatching);
+    }
+
     UInt32 driverCount = array->getCount();
     for (UInt32 driverIndex = 0; driverIndex < driverCount; driverIndex += 1) {
         OSObject *object = array->getObject(driverIndex);
