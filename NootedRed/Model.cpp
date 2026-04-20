@@ -179,6 +179,7 @@ static const DevicePair devices[] = {
     {0x1636, dev1636, "AMD Radeon RX Graphics"},
     {0x1638, "AMD Radeon RX Graphics"},
     {0x164C, "AMD Radeon RX Graphics"},
+	{0x1506, "AMD Radeon 610M"},
 };
 
 const char *getBrandingNameForDev(IOPCIDevice *device) {

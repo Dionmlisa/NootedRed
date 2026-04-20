@@ -117,6 +117,7 @@ void NRed::hwLateInit() {
     DBGLOG("NRed", "isRaven2 = %s", this->attributes.isRaven2() ? "true" : "false");
     DBGLOG("NRed", "isRenoir = %s", this->attributes.isRenoir() ? "true" : "false");
     DBGLOG("NRed", "isGreenSardine = %s", this->attributes.isGreenSardine() ? "true" : "false");
+	DBGLOG("NRed", "isMendocino = %s", this->attributes.isMendocino() ? "true" : "false");
     DBGLOG("NRed", "enumRevision = 0x%X", this->enumRevision);
 }
 
@@ -168,6 +169,13 @@ void NRed::processPatcher() {
         case 0x15D8: {
             this->attributes.setPicasso();
         } break;
+
+	case 0x1506: {
+
+		this->attributes.setMendocino();
+		DBGLOG("NRed", "Mendocino / Radeon 610M detected");
+
+	} break;
         case 0x15DD: {
         } break;
         case 0x164C:
